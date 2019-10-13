@@ -1,0 +1,27 @@
+<p>beer-list works!</p>
+<table>
+    <thead>
+        <tr>
+            <td>{{titulos.name}}</td>
+            <td>{{titulos.description}}</td>
+            <td>{{titulos.price}}</td>
+            <td>Stock</td>
+            <td>{{titulos.image}}</td>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let cerveza of cervezas"
+            [ngClass]="{
+                            'green': cerveza.stock > 2,
+                            'red': cerveza.stock === 0
+                        }">
+            <td>{{cerveza.name}}</td>
+            <td>{{cerveza.description}}</td>
+            <td>{{cerveza.price | currency}}</td>
+            <td *ngIf="cerveza.stock > 0"> {{cerveza.stock}} </td>
+            <td *ngIf="cerveza.stock < 0"> X </td>
+            <button (click)="masCerveza(cerveza)">+</button>
+            <button [disabled]="cerveza.stock === 0" (click)="menosCerveza(cerveza)">-</button>
+        </tr>
+    </tbody>
+</table>
